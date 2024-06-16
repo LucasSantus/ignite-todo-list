@@ -1,32 +1,11 @@
-import styles from "./task-list.module.css";
+import { Task } from "../types/task";
+import { TaskEmpty } from "./task-empty";
 
 interface TaskListProps {
-  numberOfTasksCreated: number;
-  numberOfTasksCompleted: number;
+  tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
-export function TaskList({
-  numberOfTasksCreated,
-  numberOfTasksCompleted,
-}: TaskListProps): JSX.Element {
-  return (
-    <header className={styles.container}>
-      <aside>
-        <span>Tarefas criadas</span>
-        <div>
-          <span>{numberOfTasksCreated}</span>
-        </div>
-      </aside>
-      <aside>
-        <span>Concluidas</span>
-        <div>
-          <span>
-            {numberOfTasksCompleted === 0
-              ? numberOfTasksCreated
-              : `${numberOfTasksCompleted} de ${numberOfTasksCreated}`}
-          </span>
-        </div>
-      </aside>
-    </header>
-  );
+export function TaskList({ tasks, setTasks }: TaskListProps): JSX.Element {
+  return <TaskEmpty />;
 }

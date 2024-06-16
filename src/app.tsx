@@ -2,11 +2,13 @@ import { Toaster } from "sonner";
 import { useLocalStorage } from "usehooks-ts";
 import { Form } from "./components/form";
 import { Header } from "./components/header";
-import { TaskList } from "./components/task-list";
+import { TaskHeader } from "./components/task-header";
 import { Wrapper } from "./components/wrapper";
 import { TASKS_LOCAL_STORAGE_KEY } from "./constants";
 import { Task } from "./types/task";
 
+import { TaskList } from "./components/task-list";
+import { TaskWrapper } from "./components/task-wrapper";
 import "./globals.css";
 
 export function App() {
@@ -23,28 +25,6 @@ export function App() {
     return prevValue;
   }, 0);
 
-  // function handleRemoveTask(id: number) {
-  //   const filteredTasks = tasks.filter((task) => task.id !== id);
-
-  //   if (!confirm("Deseja mesmo apagar essa tarefa?")) {
-  //     return;
-  //   }
-
-  //   setTasks(filteredTasks);
-  // }
-
-  // function handleToggleTask({ id, value }: { id: number; value: boolean }) {
-  //   const updatedTasks = tasks.map((task) => {
-  //     if (task.id === id) {
-  //       return { ...task, isChecked: value };
-  //     }
-
-  //     return { ...task };
-  //   });
-
-  //   setTasks(updatedTasks);
-  // }
-
   return (
     <main>
       <Header />
@@ -54,10 +34,14 @@ export function App() {
       <Wrapper>
         <Form setTasks={setTasks} />
 
-        <TaskList
-          numberOfTasksCreated={tasks.length}
-          numberOfTasksCompleted={numberOfTasksCompleted}
-        />
+        <TaskWrapper>
+          <TaskHeader
+            numberOfTasksCreated={tasks.length}
+            numberOfTasksCompleted={numberOfTasksCompleted}
+          />
+
+          <TaskList tasks={tasks} setTasks={setTasks} />
+        </TaskWrapper>
       </Wrapper>
     </main>
   );

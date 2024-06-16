@@ -14,7 +14,7 @@ interface FormProps {
 export function Form({ setTasks }: FormProps): JSX.Element {
   const [value, setValue] = useState<string>("");
 
-  function handleAddTask() {
+  function onHandleCreateNewTask() {
     if (!value) {
       toast.error("Insira um valor para registrar uma nova tarefa!", {
         style: {
@@ -42,7 +42,7 @@ export function Form({ setTasks }: FormProps): JSX.Element {
         onChange={(event) => setValue(event.target.value)}
         value={value}
       />
-      <Button onClick={handleAddTask}>
+      <Button onClick={onHandleCreateNewTask}>
         Criar
         <PlusCircle size={16} />
       </Button>
