@@ -1,7 +1,51 @@
-import styles from "./header.module.css";
+import { Button } from "./button";
+import { Input } from "./input";
 
-export function Form(): JSX.Element {
-  console.log({ styles });
+import { PlusCircle } from "phosphor-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Task } from "../types/task";
+import styles from "./form.module.css";
 
-  return <div></div>;
+interface FormProps {
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+}
+
+export function Form({ setTasks }: FormProps): JSX.Element {
+  const [value, setValue] = useState<string>("");
+
+  function handleAddTask() {
+    if (!value) {
+      toast.error("Insira um valor para registrar uma nova tarefa!", {
+        style: {
+          padding: "10px",
+        },
+      });
+      return;
+    }
+
+    const newTask: Task = {
+      id: crypto.randomUUID(),
+      text: value,
+      isChecked: false,
+    };
+
+    setTasks((currentValue) => [...currentValue, newTask]);
+
+    setValue("");
+  }
+
+  return (
+    <div className={styles.form}>
+      <Input
+        placeholder="Adicione uma nova tarefa"
+        onChange={(event) => setValue(event.target.value)}
+        value={value}
+      />
+      <Button onClick={handleAddTask}>
+        Criar
+        <PlusCircle size={16} />
+      </Button>
+    </div>
+  );
 }

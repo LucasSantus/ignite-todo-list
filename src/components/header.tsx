@@ -6,7 +6,7 @@ interface HeaderProps extends ComponentProps<"input"> {}
 
 export function Header({ ...rest }: HeaderProps): JSX.Element {
   return (
-    <header className={styles.header} {...rest}>
+    <header className={styles.container} {...rest}>
       <img
         src="/logo.svg"
         alt="Ignite - Todo List Logo"
